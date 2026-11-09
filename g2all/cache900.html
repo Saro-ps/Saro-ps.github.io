@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html manifest="900.manifest" lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>PS4 [5.05] 7.00 - 14.00 FW GoldHEN Host by Seif-Alden</title>
+<link rel="icon" type="image/jpeg" href="../img.jpg">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body class="sp">
+<script>
+history.replaceState(null,null,'index.html');var histlength=history.length;history.go(-histlength);
+function DLProgress(e){Percent=(Math.round(e.loaded / e.total * 100));window.msgs.innerHTML="Installing Offline Cache: " + Percent + "%";}
+function DisplayCacheProgress(){window.msgs.innerHTML="Cache Installed Successfully ✔";setTimeout(function(){window.msgs.innerHTML="Now Close And Re-Open Your Browser ...";},1500);}
+window.applicationCache.addEventListener("progress",DLProgress,false);
+window.applicationCache.oncached=function(e){DisplayCacheProgress();};
+window.applicationCache.onupdateready=function(e){DisplayCacheProgress();};
+window.applicationCache.onerror=function(e){window.msgs.innerHTML="Error Installing Cache! - Clear and Re-Open Your Browser ...";};
+</script>
+<script>
+/* Calm mode memory: if this device struggled in the last hour, start without animations right away. */
+(function () {
+  try {
+    var t = parseInt(localStorage.getItem("spCalm"), 10);
+    if (t && new Date().getTime() - t < 3600000) document.documentElement.className += " still";
+  } catch (e) {}
+})();
+</script>
+
+<div class="sp-bg"><div class="sp-aur sp-a1"></div><div class="sp-aur sp-a2"></div><div class="sp-aur sp-a3"></div><svg class="sp-pad" viewBox="0 0 600 360" fill="none" stroke="url(#spg)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><defs><linearGradient id="spg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6ea0ff"/><stop offset=".55" stop-color="#2459f0"/><stop offset="1" stop-color="#e03aa8"/></linearGradient></defs><path d="M128 112C160 74 440 74 472 112C526 176 574 292 524 326C484 350 442 322 422 268H178C158 322 116 350 76 326C26 292 74 176 128 112Z"/><rect x="262" y="104" width="76" height="46" rx="12"/><circle cx="226" cy="214" r="34"/><circle cx="374" cy="214" r="34"/><circle cx="226" cy="214" r="14"/><circle cx="374" cy="214" r="14"/><path d="M150 150v38M131 169h38"/><circle cx="450" cy="150" r="10"/><circle cx="478" cy="172" r="10"/><circle cx="450" cy="194" r="10"/><circle cx="422" cy="172" r="10"/><path d="M300 84v14"/><circle cx="300" cy="248" r="8"/></svg>
+<i class="sp-fl t-tri" style="left:6%;top:47%;opacity:0.14;-webkit-animation-duration:16s;animation-duration:16s;-webkit-animation-delay:-13s;animation-delay:-13s"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M12 4.2 L21 19.3 H3 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg></i>
+<i class="sp-fl t-cir" style="left:40%;top:6%;opacity:0.11;-webkit-animation-duration:21s;animation-duration:21s;-webkit-animation-delay:0s;animation-delay:0s"><svg viewBox="0 0 24 24" width="23" height="23"><circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></i>
+<i class="sp-fl t-crs" style="left:20%;top:55%;opacity:0.21;-webkit-animation-duration:25s;animation-duration:25s;-webkit-animation-delay:-2s;animation-delay:-2s"><svg viewBox="0 0 24 24" width="33" height="33"><path d="M5.2 5.2 L18.8 18.8 M18.8 5.2 L5.2 18.8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></i>
+<i class="sp-fl t-sqr" style="left:4%;top:75%;opacity:0.13;-webkit-animation-duration:19s;animation-duration:19s;-webkit-animation-delay:-19s;animation-delay:-19s"><svg viewBox="0 0 24 24" width="37" height="37"><rect x="5" y="5" width="14" height="14" rx="1.6" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></i>
+<i class="sp-fl t-tri" style="left:76%;top:15%;opacity:0.17;-webkit-animation-duration:15s;animation-duration:15s;-webkit-animation-delay:-6s;animation-delay:-6s"><svg viewBox="0 0 24 24" width="25" height="25"><path d="M12 4.2 L21 19.3 H3 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg></i>
+<i class="sp-fl t-cir" style="left:5%;top:5%;opacity:0.12;-webkit-animation-duration:19s;animation-duration:19s;-webkit-animation-delay:-10s;animation-delay:-10s"><svg viewBox="0 0 24 24" width="38" height="38"><circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></i>
+<i class="sp-fl t-crs" style="left:55%;top:39%;opacity:0.14;-webkit-animation-duration:19s;animation-duration:19s;-webkit-animation-delay:-6s;animation-delay:-6s"><svg viewBox="0 0 24 24" width="39" height="39"><path d="M5.2 5.2 L18.8 18.8 M18.8 5.2 L5.2 18.8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></i>
+<i class="sp-fl t-sqr" style="left:53%;top:46%;opacity:0.21;-webkit-animation-duration:23s;animation-duration:23s;-webkit-animation-delay:-4s;animation-delay:-4s"><svg viewBox="0 0 24 24" width="42" height="42"><rect x="5" y="5" width="14" height="14" rx="1.6" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></i>
+<i class="sp-fl t-tri" style="left:11%;top:36%;opacity:0.19;-webkit-animation-duration:18s;animation-duration:18s;-webkit-animation-delay:-19s;animation-delay:-19s"><svg viewBox="0 0 24 24" width="40" height="40"><path d="M12 4.2 L21 19.3 H3 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg></i>
+<i class="sp-fl t-cir" style="left:62%;top:67%;opacity:0.17;-webkit-animation-duration:20s;animation-duration:20s;-webkit-animation-delay:0s;animation-delay:0s"><svg viewBox="0 0 24 24" width="25" height="25"><circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></i>
+<i class="sp-fl t-crs" style="left:55%;top:51%;opacity:0.15;-webkit-animation-duration:18s;animation-duration:18s;-webkit-animation-delay:-13s;animation-delay:-13s"><svg viewBox="0 0 24 24" width="44" height="44"><path d="M5.2 5.2 L18.8 18.8 M18.8 5.2 L5.2 18.8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></i>
+<i class="sp-fl t-sqr" style="left:62%;top:5%;opacity:0.18;-webkit-animation-duration:27s;animation-duration:27s;-webkit-animation-delay:-9s;animation-delay:-9s"><svg viewBox="0 0 24 24" width="43" height="43"><rect x="5" y="5" width="14" height="14" rx="1.6" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></i>
+<i class="sp-fl t-tri" style="left:26%;top:33%;opacity:0.18;-webkit-animation-duration:27s;animation-duration:27s;-webkit-animation-delay:-16s;animation-delay:-16s"><svg viewBox="0 0 24 24" width="38" height="38"><path d="M12 4.2 L21 19.3 H3 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg></i>
+<i class="sp-fl t-cir" style="left:11%;top:5%;opacity:0.19;-webkit-animation-duration:20s;animation-duration:20s;-webkit-animation-delay:-3s;animation-delay:-3s"><svg viewBox="0 0 24 24" width="22" height="22"><circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></i>
+<i class="sp-fl t-crs" style="left:81%;top:7%;opacity:0.15;-webkit-animation-duration:17s;animation-duration:17s;-webkit-animation-delay:-7s;animation-delay:-7s"><svg viewBox="0 0 24 24" width="25" height="25"><path d="M5.2 5.2 L18.8 18.8 M18.8 5.2 L5.2 18.8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></i>
+<i class="sp-fl t-sqr" style="left:81%;top:24%;opacity:0.15;-webkit-animation-duration:26s;animation-duration:26s;-webkit-animation-delay:-16s;animation-delay:-16s"><svg viewBox="0 0 24 24" width="36" height="36"><rect x="5" y="5" width="14" height="14" rx="1.6" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></i>
+<div class="sp-glow"></div><div class="sp-vig"></div></div>
+<main class="sp-main compact">
+  <div class="sp-emblem sm rise"><div class="face"><img src="../img.jpg" alt="SARO"></div></div>
+  <h2 id="pvTitle" class="sp-title silver rise d1">جاري تجهيز الجهاز…</h2>
+  <ol id="steps" class="sp-steps rise d2">
+    <li id="step1" class="active"><span class="n tri"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M12 4.2 L21 19.3 H3 Z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/></svg></span><b>تنزيل الصفحة</b><small>جاري التحميل</small></li>
+    <li id="step2" class="pend"><span class="n cir"><svg viewBox="0 0 24 24" width="30" height="30"><circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="2.6"/></svg></span><b>تحميل GoldHEN</b><small>في الانتظار</small></li>
+    <li id="step3" class="pend"><span class="n crs"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M5.2 5.2 L18.8 18.8 M18.8 5.2 L5.2 18.8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span><b>اكتمال التفعيل</b><small>في الانتظار</small></li>
+  </ol>
+  <h1 id="msgs" class="sp-status rise d3">Starting Cache Installation...</h1>
+  <div class="sp-bar4 rise d4" aria-hidden="true"><i id="dlbar"></i></div>
+  <p id="pvNote" class="sp-note rise d5">ماتقفلش الصفحة لحد ما التحميل يخلص</p>
+</main>
+<footer class="sp-foot">
+  <div class="ph">
+    <a href="tel:01090941894">01090941894</a>
+  </div>
+  <div class="cr">شكر خاص إلى:<br> <span dir="ltr"> <a href="https://twitter.com/_AlAzif" target="_blank" rel="noopener">@_AlAzif</a> ChendoChap <a href="https://x.com/Kameleonre_" target="_blank" rel="noopener">@Kameleonre_</a> SiSTR0 Abc </span></div>
+  <div class="hk"><span><em class="t-crs"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M5.2 5.2 L18.8 18.8 M18.8 5.2 L5.2 18.8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></em>اختيار</span><span><em class="t-cir"><svg viewBox="0 0 24 24" width="14" height="14"><circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="3"/></svg></em>رجوع</span></div>
+</footer>
+
+<script>
+/* Visual helper only: it READS #msgs and never writes to it, so the cache scripts above are untouched.
+   Fills the bar with the real percentage, drives the steps and tints the status box. */
+(function () {
+  var msgs = document.getElementById("msgs");
+  if (!msgs) return;
+  var bar = document.getElementById("dlbar");
+  var s1 = document.getElementById("step1"), node = s1.getElementsByTagName("span")[0], small = s1.getElementsByTagName("small")[0];
+  var title = document.getElementById("pvTitle"), note = document.getElementById("pvNote");
+  var CHECK14 = '<svg viewBox="0 0 24 24" width="14" height="14"><path d="M5.5 12.8l4.4 4.4 8.6-9.6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>', CROSS30 = '<svg viewBox="0 0 24 24" width="30" height="30"><path d="M5.2 5.2 L18.8 18.8 M18.8 5.2 L5.2 18.8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>', TRI30 = '<svg viewBox="0 0 24 24" width="30" height="30"><path d="M12 4.2 L21 19.3 H3 Z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/></svg>', CHECK22 = '<svg viewBox="0 0 24 24" width="22" height="22"><path d="M5.5 12.8l4.4 4.4 8.6-9.6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>', CROSS22 = '<svg viewBox="0 0 24 24" width="22" height="22"><path d="M5.2 5.2 L18.8 18.8 M18.8 5.2 L5.2 18.8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';
+  var state = "";
+  function paint() {
+    var t = msgs.textContent || "", m = t.match(/(\d+)\s*%/);
+    if (/Error|Failed|Not Found|Unsupported/i.test(t)) state = "fail";
+    else if (state !== "fail" && /Installed Successfully|Now Close/i.test(t)) state = "ok";
+    if (state === "ok") {
+      bar.style.width = "100%"; bar.className = "ok";
+      s1.className = "done"; node.innerHTML = TRI30 + '<span class="ck">' + CHECK14 + '</span>'; small.innerHTML = "\u062a\u0645\u0651\u062a";
+      title.innerHTML = "\u062a\u0645 \u062a\u0646\u0632\u064a\u0644 \u0627\u0644\u0635\u0641\u062d\u0629";
+      note.innerHTML = "\u0627\u0642\u0641\u0644 \u0627\u0644\u0645\u062a\u0635\u0641\u062d \u0648\u0627\u0641\u062a\u062d\u0647 \u062a\u0627\u0646\u064a \u0639\u0634\u0627\u0646 \u064a\u0643\u0645\u0644";
+    } else if (state === "fail") {
+      bar.className = "fail";
+      s1.className = "fail"; node.innerHTML = CROSS30; small.innerHTML = "\u0641\u0634\u0644";
+      title.innerHTML = "\u0641\u0634\u0644 \u0627\u0644\u062a\u062d\u0645\u064a\u0644";
+      note.innerHTML = "\u0627\u0645\u0633\u062d \u0628\u064a\u0627\u0646\u0627\u062a \u0627\u0644\u0645\u062a\u0635\u0641\u062d \u0648\u062c\u0631\u0628 \u062a\u0627\u0646\u064a";
+    } else if (m) {
+      bar.style.width = m[1] + "%";
+      small.innerHTML = "\u062c\u0627\u0631\u064a \u0627\u0644\u062a\u062d\u0645\u064a\u0644 " + m[1] + "%";
+    }
+    msgs.className = "sp-status" + (state ? " " + state : "");
+  }
+  paint();
+  setInterval(paint, 250);
+})();
+</script>
+
+<script>
+/* Adaptive calm mode. Watches how smoothly the browser draws; if it keeps dropping below ~14 fps
+   (or freezes for a moment) it adds "still" to <html>, which stops every animation, and remembers it for an hour.
+   It only measures time - it never touches the host scripts or #msgs. */
+(function () {
+  var root = document.documentElement;
+  if (root.className.indexOf("still") > -1) return;
+  var raf = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
+  var last = 0, frames = 0, slow = 0, sum = 0, start = new Date().getTime(), winStart = start, done = false;
+  function calm() {
+    done = true;
+    root.className += " still";
+    try { localStorage.setItem("spCalm", String(new Date().getTime())); } catch (e) {}
+  }
+  function sample(t, slowAt, avgAt) {
+    if (done) return;
+    if (document.hidden || document.webkitHidden) { last = 0; winStart = t; frames = slow = sum = 0; return; }
+    if (last) {
+      var d = t - last;
+      frames++; sum += (d > 1000 ? 1000 : d);
+      if (d > slowAt) slow++;
+    }
+    last = t;
+    if (t - winStart >= 2500) {
+      if (t - start > 1500 && frames > 4 && (slow / frames >= 0.3 || sum / frames > avgAt)) { calm(); return; }
+      frames = slow = sum = 0; winStart = t;
+    }
+  }
+  if (raf) {
+    (function tick() { if (done) return; sample(new Date().getTime(), 90, 70); raf.call(window, tick); })();
+  } else {
+    setInterval(function () { sample(new Date().getTime(), 250, 180); }, 100);
+  }
+})();
+</script>
+
+<div id="fwbadge" class="fw-badge" aria-live="polite"></div>
+<script>
+/* Firmware badge. Reads the user agent only and writes only into #fwbadge.
+   The ranges below are the same ones index.html uses to pick an exploit:
+   5.05 / 5.07, 7.00-8.52, 9.00-9.60, 10.00-11.02, 11.50-12.02,
+   12.50-13.00, 13.02-13.52 and 14.00. */
+(function () {
+  var el = document.getElementById("fwbadge");
+  if (!el) return;
+  var m = navigator.userAgent.match(/PlayStation 4[ \/]([\d.]+)/i);
+  var ver = m ? m[1] : "", v = m ? parseFloat(m[1]) : 0;
+  var ok = m && (v === 5.05 || v === 5.07 ||
+    (v >= 7.00 && v <= 8.52) || (v >= 9.00 && v <= 9.60) ||
+    (v >= 10.00 && v <= 11.02) || (v >= 11.50 && v <= 12.02) ||
+    (v >= 12.50 && v <= 13.00) || (v >= 13.02 && v <= 13.52) || v === 14.00);
+  var icon = ok
+    ? '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11"/><path d="M6.5 12.6l3.8 3.8 7.2-8" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    : '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11"/><path d="M8 8l8 8M16 8l-8 8" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/></svg>';
+  el.className = "fw-badge " + (ok ? "is-ok" : "is-bad");
+  if (!m) {
+    el.innerHTML = icon + '<span class="fw-txt">\u0644\u064a\u0633 \u062c\u0647\u0627\u0632 PS4</span>';
+  } else {
+    el.innerHTML = icon + '<span class="fw-txt fw-ps">PS4</span><span class="fw-ver">' + ver + '</span><span class="fw-sep">\u00b7</span><span>' +
+      (ok ? "\u0645\u062f\u0639\u0648\u0645" : "\u063a\u064a\u0631 \u0645\u062f\u0639\u0648\u0645") + '</span>';
+  }
+})();
+</script>
+</body>
+</html>
