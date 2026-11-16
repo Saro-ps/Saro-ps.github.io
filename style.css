@@ -1,0 +1,1053 @@
+/* ===================================================================
+   SARO — PS4 Host
+   Theme built from the SARO logo: black field, electric blue, white,
+   and the four PlayStation symbol colors (green / red / blue / pink).
+   All original ids (#msgs, #menu, #okCount, #failCount) and classes
+   (.btn, .btn-onln, .btn-toolbox, .btn-ps5, .card, .grid, .stat...)
+   are kept, so sub-pages keep working.
+   No CSS variables / no CSS Grid — plain + -webkit- prefixed for the
+   PS4's built-in (old WebKit) browser.
+   Palette: night #05060c · panel #0c1226 · blue #2459f0 ·
+            deep blue #1042c5 · sky #6ea0ff · text #f4f6ff ·
+            muted #8f9bc2 · green #22c097 · red #e5323a · pink #e03aa8
+   =================================================================== */
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  background-color: #05060c;
+  background-image:
+    -webkit-radial-gradient(50% 22%, ellipse, rgba(36,89,240,0.22) 0%, rgba(36,89,240,0) 46%),
+    -webkit-radial-gradient(50% 108%, ellipse, rgba(224,58,168,0.11) 0%, rgba(224,58,168,0) 55%),
+    url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240' fill='none' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M38 62 L52 38 L66 62 Z' stroke='%2322c097' stroke-opacity='0.13'/%3E%3Ccircle cx='178' cy='50' r='15' stroke='%23e5323a' stroke-opacity='0.13'/%3E%3Cpath d='M44 178 L68 202 M68 178 L44 202' stroke='%232459f0' stroke-opacity='0.16'/%3E%3Crect x='164' y='168' width='28' height='28' rx='3' stroke='%23e03aa8' stroke-opacity='0.13'/%3E%3C/svg%3E");
+  background-image:
+    radial-gradient(ellipse at 50% 22%, rgba(36,89,240,0.22) 0%, rgba(36,89,240,0) 46%),
+    radial-gradient(ellipse at 50% 108%, rgba(224,58,168,0.11) 0%, rgba(224,58,168,0) 55%),
+    url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240' fill='none' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M38 62 L52 38 L66 62 Z' stroke='%2322c097' stroke-opacity='0.13'/%3E%3Ccircle cx='178' cy='50' r='15' stroke='%23e5323a' stroke-opacity='0.13'/%3E%3Cpath d='M44 178 L68 202 M68 178 L44 202' stroke='%232459f0' stroke-opacity='0.16'/%3E%3Crect x='164' y='168' width='28' height='28' rx='3' stroke='%23e03aa8' stroke-opacity='0.13'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  color: #f4f6ff;
+  text-align: center;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Cairo', 'Segoe UI', Tahoma, Arial, sans-serif;
+  padding: 40px 24px 48px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+h1 {
+  text-shadow: none;
+  font-size: 30px;
+  color: #f4f6ff;
+  margin: 0;
+}
+
+/* -------------------------------------------------------------
+   Layout wrapper
+   ------------------------------------------------------------- */
+
+.page {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* -------------------------------------------------------------
+   Hero / logo / status message (#msgs is written to by the
+   firmware scripts — id kept exactly)
+   ------------------------------------------------------------- */
+
+.hero {
+  padding-bottom: 28px;
+}
+
+.logo {
+  display: block;
+  width: 340px;
+  max-width: 70%;
+  height: auto;
+  margin: 0 auto 22px;
+  border-radius: 36px;
+  border: 3px solid #2459f0;
+  background: #000;
+  box-shadow: 0 0 0 8px rgba(36,89,240,0.12),
+              0 18px 50px rgba(0,0,0,0.7),
+              0 0 70px rgba(36,89,240,0.45);
+}
+
+#msgs {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.7;
+  color: #f4f6ff;
+  background: #0c1226;
+  border: 2px solid rgba(36,89,240,0.45);
+  border-radius: 20px;
+  padding: 14px 30px;
+  display: inline-block;
+  max-width: 100%;
+  min-height: 28px;
+  unicode-bidi: -webkit-plaintext;
+  unicode-bidi: plaintext;
+  -webkit-transition: color 0.15s ease;
+  transition: color 0.15s ease;
+}
+
+/* -------------------------------------------------------------
+   Loader / cache-install pages (index, cache700, cache900,
+   cachecss, cacheslopkit). The scripts write status text into
+   #msgs directly — only the shell around it is new.
+   ------------------------------------------------------------- */
+
+.loader-page {
+  min-height: 80vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.loader-sub {
+  display: inline-block;
+  font-size: 19px;
+  font-weight: 600;
+  color: #8f9bc2;
+  margin: 0 0 12px;
+}
+
+.loader-status {
+  font-size: 26px;
+  padding: 18px 38px;
+  -webkit-animation: loaderPulse 1.8s ease-in-out infinite;
+  animation: loaderPulse 1.8s ease-in-out infinite;
+}
+
+@-webkit-keyframes loaderPulse {
+  0%, 100% { border-color: rgba(36,89,240,0.40); }
+  50% { border-color: rgba(110,160,255,0.95); }
+}
+@keyframes loaderPulse {
+  0%, 100% { border-color: rgba(36,89,240,0.40); }
+  50% { border-color: rgba(110,160,255,0.95); }
+}
+
+/* -------------------------------------------------------------
+   Activation stats — success / fail tiles. Counts are per-device
+   (stored in localStorage on the PS4's own browser), not a shared
+   site-wide counter. Colors are the logo's green triangle and red
+   circle.
+   ------------------------------------------------------------- */
+
+.loader-stats {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin: 26px 0 0;
+}
+
+.stat {
+  display: block;
+  min-width: 190px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 18px;
+  padding: 14px 26px 10px;
+  margin: 6px 10px;
+  border: 2px solid transparent;
+}
+
+.stat b {
+  display: block;
+  direction: ltr;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 2px 0 0;
+}
+
+.stat-ok {
+  color: #2fd8ad;
+  background: rgba(34,192,151,0.10);
+  border-color: rgba(34,192,151,0.50);
+}
+
+.stat-fail {
+  color: #ff6b72;
+  background: rgba(229,50,58,0.10);
+  border-color: rgba(229,50,58,0.50);
+}
+
+/* -------------------------------------------------------------
+   Main menu page (<body class="home">): 11 firmware cards, so the
+   hero is more compact than on the single-purpose loader pages.
+   .logo-strip is the small four-color bar under the logo.
+   ------------------------------------------------------------- */
+
+.logo-strip {
+  width: 140px;
+  height: 4px;
+  margin: 0 auto 20px;
+  border-radius: 999px;
+  background: #2459f0;
+  background: -webkit-linear-gradient(left, #22c097 0%, #22c097 25%, #2459f0 25%, #2459f0 50%, #e5323a 50%, #e5323a 75%, #e03aa8 75%, #e03aa8 100%);
+  background: linear-gradient(to right, #22c097 0%, #22c097 25%, #2459f0 25%, #2459f0 50%, #e5323a 50%, #e5323a 75%, #e03aa8 75%, #e03aa8 100%);
+}
+
+.home .hero { padding-bottom: 6px; }
+.home .logo { width: 250px; margin-bottom: 18px; }
+.home #msgs { font-size: 19px; padding: 12px 28px; }
+.home .card { padding: 16px 10px; }
+.home .card .ver { font-size: 22px; }
+.home .card .tag { font-size: 15px; }
+
+/* -------------------------------------------------------------
+   Firmware grid
+   ------------------------------------------------------------- */
+
+#menu {
+  display: block;
+}
+
+.grid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin: 26px 0 10px;
+}
+
+.card {
+  position: relative;
+  display: block;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 180px;
+  flex: 1 1 180px;
+  max-width: 250px;
+  margin: 8px;
+  padding: 20px 14px;
+  background: #0c1226;
+  border: 2px solid rgba(36,89,240,0.40);
+  border-radius: 18px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+  transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+}
+
+.card .ver {
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+  color: #f4f6ff;
+}
+
+.card .tag {
+  display: block;
+  margin-top: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #8f9bc2;
+}
+
+.card:hover,
+.card:focus {
+  border-color: #6ea0ff;
+  background: #121b38;
+  -webkit-transform: translateY(-3px);
+  transform: translateY(-3px);
+}
+
+.card:hover .ver,
+.card:focus .ver { color: #6ea0ff; }
+
+.card:active {
+  -webkit-transform: scale(0.96);
+  transform: scale(0.96);
+  border-color: #2459f0;
+  background: #17224a;
+}
+
+/* -------------------------------------------------------------
+   Action buttons — .btn / .btn-onln kept as the original class
+   names (in case sub-pages reuse them), restyled here.
+   ------------------------------------------------------------- */
+
+.actions {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.btn {
+  background: transparent;
+  color: #f4f6ff;
+  border: 2px solid rgba(255,255,255,0.24);
+  font-size: 19px;
+  font-weight: 700;
+  padding: 14px 34px;
+  margin: 6px 8px;
+  border-radius: 999px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.1s ease, border-color 0.15s ease, background 0.15s ease;
+  transition: transform 0.1s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.btn:hover,
+.btn:focus {
+  border-color: #6ea0ff;
+  background: rgba(110,160,255,0.12);
+}
+
+.btn:active {
+  -webkit-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+.btn-onln {
+  background: #2459f0;
+  background: -webkit-linear-gradient(top, #3b78ff, #1042c5);
+  background: linear-gradient(to bottom, #3b78ff, #1042c5);
+  border-color: #3b78ff;
+  color: #fff;
+}
+
+.btn-onln:hover,
+.btn-onln:focus {
+  background: #3b78ff;
+  border-color: #6ea0ff;
+}
+
+/* -------------------------------------------------------------
+   Footer — four-color strip (the logo's four symbols), contact,
+   credit line
+   ------------------------------------------------------------- */
+
+.site-footer {
+  margin-top: 44px;
+}
+
+.site-footer:before {
+  content: "";
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  margin-bottom: 28px;
+  background: #2459f0;
+  background: -webkit-linear-gradient(left, #22c097 0%, #22c097 25%, #2459f0 25%, #2459f0 50%, #e5323a 50%, #e5323a 75%, #e03aa8 75%, #e03aa8 100%);
+  background: linear-gradient(to right, #22c097 0%, #22c097 25%, #2459f0 25%, #2459f0 50%, #e5323a 50%, #e5323a 75%, #e03aa8 75%, #e03aa8 100%);
+}
+
+.contact {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.contact a {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  background: #2459f0;
+  background: -webkit-linear-gradient(top, #3b78ff, #1042c5);
+  background: linear-gradient(to bottom, #3b78ff, #1042c5);
+  border: 2px solid #3b78ff;
+  border-radius: 999px;
+  padding: 8px 30px;
+  margin: 4px 8px;
+  direction: ltr;
+  -webkit-transition: background 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.contact a:hover,
+.contact a:focus {
+  background: #3b78ff;
+  border-color: #6ea0ff;
+}
+
+.credit {
+  font-size: 17px;
+  color: #7783ab;
+  line-height: 2;
+  margin: 0;
+}
+
+.credit a {
+  color: #6ea0ff;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(110,160,255,0.4);
+}
+
+.credit a:hover { color: #fff; border-color: #fff; }
+
+/* ===================================================================
+   Legacy / shared classes — kept for compatibility with sub-pages.
+   Not used on this page right now, left in place intentionally.
+   =================================================================== */
+
+#progress { display: block; }
+#tools { display: none; }
+#lnx { display: none; }
+#mods { display: none; }
+
+.btn-toolbox {
+  background-color: #c4262c;
+  color: #fff;
+  border-color: #c4262c;
+}
+.btn-toolbox:hover { background-color: #e5323a; border-color: #e5323a; }
+
+.btn-ps5 {
+  background-color: #1b2a55;
+  color: #fff;
+  border-color: #1b2a55;
+}
+.btn-ps5:hover { background-color: #d6e2ff; border-color: #d6e2ff; color: #05060c; }
+
+
+/* ===================================================================
+   v4 layer — appended on top of the theme above (nothing above was
+   edited). Still plain CSS: no variables, no grid, no min()/clamp(),
+   -webkit- prefixes kept, for the PS4's old WebKit browser.
+
+   1. Cairo font bundled locally (fonts/ folder) — no internet needed
+   2. Fits one TV screen: sizes use vh, so everything (logo, status,
+      buttons, phone numbers, credits) stays visible without scrolling
+      on a 1280x720 canvas (the pages ask for width=1280)
+   3. Status box turns green / red; cache pages get a real progress bar
+   4. Clear focus ring for controller (D-pad) navigation
+   5. Brighter, larger credit line
+   =================================================================== */
+
+@font-face {
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: 600;
+  src: url(fonts/cairo-arabic-600-normal.woff2) format('woff2'),
+       url(fonts/cairo-arabic-600-normal.woff) format('woff');
+  unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;
+}
+
+@font-face {
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: 600;
+  src: url(fonts/cairo-latin-600-normal.woff2) format('woff2'),
+       url(fonts/cairo-latin-600-normal.woff) format('woff');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: 700;
+  src: url(fonts/cairo-arabic-700-normal.woff2) format('woff2'),
+       url(fonts/cairo-arabic-700-normal.woff) format('woff');
+  unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;
+}
+
+@font-face {
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: 700;
+  src: url(fonts/cairo-latin-700-normal.woff2) format('woff2'),
+       url(fonts/cairo-latin-700-normal.woff) format('woff');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: 800;
+  src: url(fonts/cairo-arabic-800-normal.woff2) format('woff2'),
+       url(fonts/cairo-arabic-800-normal.woff) format('woff');
+  unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;
+}
+
+@font-face {
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: 800;
+  src: url(fonts/cairo-latin-800-normal.woff2) format('woff2'),
+       url(fonts/cairo-latin-800-normal.woff) format('woff');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+
+/* ---- 2. fit the screen --------------------------------------- */
+
+html { height: 100%; }
+
+body {
+  min-height: 100%;
+  padding: 2.4vh 3vw;
+}
+
+.page {
+  width: 100%;
+  max-width: 900px;
+  min-height: 95vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.loader-page { min-height: 95vh; }
+
+.home .page {
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+}
+
+.hero { padding-bottom: 1.2vh; }
+.home .hero { padding-bottom: 0.4vh; }
+
+.logo {
+  width: 25vh;
+  max-width: 300px;
+  margin: 0 auto 1.6vh;
+  border-radius: 11%;
+}
+.home .logo { width: 21vh; max-width: 250px; margin-bottom: 1.4vh; }
+
+.logo-strip { margin: 0 auto 1.4vh; }
+
+h1 { font-size: 26px; }
+
+#msgs { line-height: 1.5; }
+.home #msgs { font-size: 19px; padding: 0.9vh 26px; }
+
+.loader-sub { font-size: 18px; margin: 0 0 1vh; line-height: 1.5; }
+
+.loader-status { font-size: 24px; padding: 1.3vh 32px; }
+
+.loader-stats { margin: 1.8vh 0 0; }
+.stat { min-width: 170px; font-size: 17px; padding: 0.9vh 22px 0.5vh; margin: 4px 10px; line-height: 1.4; }
+.stat b { font-size: 34px; line-height: 1.15; }
+
+.grid { margin: 2vh 0 0.4vh; }
+.home .card { padding: 1.4vh 10px; }
+.home .card .ver { font-size: 22px; line-height: 1.4; }
+.home .card .tag { font-size: 15px; line-height: 1.4; }
+
+.actions { margin-top: 1.4vh; }
+.btn { font-size: 19px; padding: 1vh 32px; line-height: 1.5; }
+
+.site-footer { margin-top: 2.6vh; }
+.site-footer:before { margin-bottom: 2.2vh; }
+
+.contact { margin-bottom: 1.2vh; }
+.contact a { font-size: 21px; padding: 3px 28px; line-height: 1.6; }
+
+/* ---- 5. credit line: bigger + brighter ------------------------ */
+
+.credit { font-size: 20px; color: #aab6dc; line-height: 1.55; }
+.credit a { font-size: 20px; }
+
+/* ---- 3. status colours + real progress bar -------------------- */
+
+#msgs.is-ok {
+  color: #ffffff;
+  background: rgba(34,192,151,0.16);
+  border-color: #2fd8ad;
+  -webkit-animation: none;
+  animation: none;
+}
+
+#msgs.is-fail {
+  color: #ffffff;
+  background: rgba(229,50,58,0.18);
+  border-color: #ff6b72;
+  -webkit-animation: none;
+  animation: none;
+}
+
+.dl-progress {
+  width: 440px;
+  max-width: 80%;
+  height: 10px;
+  margin: 1.8vh auto 0;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+  overflow: hidden;
+}
+
+.dl-progress i {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: 999px;
+  background: #6ea0ff;
+  background: -webkit-linear-gradient(left, #22c097, #2459f0 55%, #e03aa8);
+  background: linear-gradient(to right, #22c097, #2459f0 55%, #e03aa8);
+  -webkit-transition: width 0.25s ease;
+  transition: width 0.25s ease;
+}
+
+.dl-progress i.is-ok   { background: #2fd8ad; }
+.dl-progress i.is-fail { background: #ff6b72; }
+
+/* ---- 4. controller focus ring --------------------------------- */
+
+.card:focus,
+.btn:focus,
+.contact a:focus,
+.credit a:focus {
+  outline: 3px solid #6ea0ff;
+  outline-offset: 3px;
+}
+
+.card:focus {
+  -webkit-box-shadow: 0 0 22px rgba(110,160,255,0.45);
+  box-shadow: 0 0 22px rgba(110,160,255,0.45);
+}
+
+/* ---- 6. firmware badge (icon + version + supported / not) ------ */
+
+.fw-badge {
+  position: fixed;
+  top: 2.6vh;
+  left: 3vw;
+  z-index: 20;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  padding: 5px 16px 5px 12px;
+  border-radius: 999px;
+  border: 2px solid rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.35);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #ffffff;
+}
+.fw-badge svg { display: block; width: 22px; height: 22px; margin-left: 9px; }
+.fw-badge svg circle { fill: currentColor; }
+.fw-badge .fw-ver { direction: ltr; unicode-bidi: embed; margin-left: 8px; }
+.fw-badge .fw-sep { opacity: 0.5; margin-left: 8px; }
+.fw-badge.is-ok  { color: #2fd8ad;  border-color: #2fd8ad;  background: rgba(34,192,151,0.14); }
+.fw-badge.is-bad { color: #ff6b72; border-color: #ff6b72; background: rgba(229,50,58,0.14); }
+.fw-badge .fw-txt { color: #ffffff; }
+.fw-badge .fw-ps { margin-left: 8px; }
+
+/* very short screens: squeeze a little more so nothing is cut */
+@media (max-height: 640px) {
+  .logo { width: 21vh; }
+  .home .logo { width: 18vh; }
+  .loader-status { font-size: 21px; }
+  .stat b { font-size: 28px; }
+  .credit, .credit a { font-size: 18px; }
+}
+
+/* ---- 7. v6 screens: device card, activation steps, success ------- */
+
+.pv-title { font-size: 30px; font-weight: 800; color: #f4f6ff; margin: 0 0 1.2vh; line-height: 1.4; text-align: center; }
+.pv-title.big { font-size: 42px; margin: 1.2vh 0; }
+.pv-note { font-size: 17px; color: #8f9bc2; margin: 1.2vh 0 0; text-align: center; line-height: 1.5; }
+.pv-sub  { font-size: 20px; font-weight: 700; color: #f4f6ff; margin: 1.8vh 0 1vh; text-align: center; }
+
+.has-steps .logo { width: 19vh; max-width: 230px; margin-bottom: 1vh; }
+
+/* shared centring helpers (old WebKit needs the -webkit- boxes) */
+.dc-row, .dc-pill, .step .dot, .ok-circle, .next-i .dot, .mini-count, .mini-count span {
+  display: -webkit-box; display: -webkit-flex; display: flex;
+  -webkit-box-align: center; -webkit-align-items: center; align-items: center;
+  -webkit-box-pack: center; -webkit-justify-content: center; justify-content: center;
+}
+
+/* home: device card + one big start button */
+.device-card { width: 600px; max-width: 92%; margin: 0 auto; padding: 2vh 30px 1.8vh; background: #0c1226; border: 2px solid rgba(36,89,240,0.45); border-radius: 26px; text-align: center; }
+.dc-label { font-size: 18px; color: #8f9bc2; margin: 0; }
+.dc-ps  { font-size: 30px; font-weight: 700; color: #f4f6ff; margin-left: 12px; }
+.dc-ver { font-size: 54px; font-weight: 800; color: #ffffff; direction: ltr; line-height: 1.2; margin-left: 20px; }
+.dc-pill { padding: 4px 18px 4px 12px; border-radius: 999px; border: 2px solid #2fd8ad; color: #2fd8ad; background: rgba(34,192,151,0.14); font-size: 20px; font-weight: 700; }
+.dc-pill.is-bad { border-color: #ff6b72; color: #ff6b72; background: rgba(229,50,58,0.14); }
+.dc-pill svg { display: block; margin-left: 8px; }
+.big-btn { display: block; width: 380px; max-width: 100%; margin: 1.8vh auto 0; padding: 1.3vh 0; font-size: 30px; font-weight: 800; color: #ffffff; text-align: center; text-decoration: none; border-radius: 999px; border: 2px solid #3b78ff; background: #3b78ff; background: -webkit-linear-gradient(top, #3b78ff, #1042c5); background: linear-gradient(to bottom, #3b78ff, #1042c5); }
+.big-btn:focus { outline: 3px solid #6ea0ff; outline-offset: 4px; -webkit-box-shadow: 0 0 26px rgba(110,160,255,0.40); box-shadow: 0 0 26px rgba(110,160,255,0.40); }
+.big-btn.is-disabled { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.45); }
+.dc-hint { font-size: 15px; color: #8f9bc2; margin: 1.2vh 0 0; line-height: 1.5; }
+
+.dc-links { display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-pack: center; -webkit-justify-content: center; justify-content: center; }
+.ghost-link { display: block; min-width: 200px; margin: 1.6vh 8px 0; padding: 0.5vh 22px; text-align: center; font-size: 18px; color: #8f9bc2; border: 2px solid rgba(255,255,255,0.2); border-radius: 999px; text-decoration: none; }
+.ghost-link:focus { outline: 3px solid #6ea0ff; outline-offset: 3px; color: #f4f6ff; }
+/* the old theme has an #menu { display: block } rule, so these need id-level specificity */
+#menu.alt-panel { display: none; }
+body.alt-open #menu.alt-panel { display: block; }
+body.alt-open .device-card, body.alt-open .dc-links { display: none; }
+.alt-panel .ghost-link { margin: 1.6vh auto 0; width: 200px; }
+
+/* activation steps */
+.steps { display: -webkit-box; display: -webkit-flex; display: flex; width: 700px; max-width: 94%; margin: 1vh auto 2vh; padding: 0; position: relative; list-style: none; }
+.steps:before { content: ""; position: absolute; top: 28px; left: 16.66%; right: 16.66%; height: 4px; margin-top: -2px; background: rgba(255,255,255,0.14); border-radius: 2px; }
+.steps:after  { content: ""; position: absolute; top: 28px; right: 16.66%; width: 0; height: 4px; margin-top: -2px; background: #2fd8ad; border-radius: 2px; }
+.steps.p1:after { width: 33.33%; }
+.steps.p2:after { width: 66.66%; }
+.step { -webkit-box-flex: 1; -webkit-flex: 1; flex: 1; text-align: center; position: relative; z-index: 1; }
+.step .dot { width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 1vh; font-size: 26px; font-weight: 800; background: #0c1226; border: 3px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.55); }
+.step b { display: block; font-size: 20px; font-weight: 700; color: #f4f6ff; line-height: 1.4; }
+.step small { display: block; font-size: 15px; color: #8f9bc2; line-height: 1.4; }
+.step.is-done .dot { background: #2fd8ad; border-color: #2fd8ad; color: #06261e; }
+.step.is-done small { color: #2fd8ad; }
+.step.is-active .dot { border-color: #6ea0ff; color: #6ea0ff; -webkit-box-shadow: 0 0 0 6px rgba(110,160,255,0.18); box-shadow: 0 0 0 6px rgba(110,160,255,0.18); }
+.step.is-active small { color: #6ea0ff; }
+.step.is-fail .dot { background: #ff6b72; border-color: #ff6b72; color: #2a0c0f; }
+.step.is-fail small { color: #ff6b72; }
+
+/* success screen: swapped in by the helper script (body.is-success) */
+.ok-circle, .next, .pv-sub { display: none; }
+.ok-circle { width: 14vh; height: 14vh; max-width: 120px; max-height: 120px; margin: 0 auto; border-radius: 50%; background: rgba(34,192,151,0.16); border: 3px solid #2fd8ad; color: #2fd8ad; -webkit-box-shadow: 0 0 0 10px rgba(34,192,151,0.10); box-shadow: 0 0 0 10px rgba(34,192,151,0.10); }
+.next-i { -webkit-box-flex: 1; -webkit-flex: 1; flex: 1; margin: 0 8px; padding: 1.3vh 14px; background: #0c1226; border: 2px solid rgba(36,89,240,0.45); border-radius: 18px; text-align: center; font-size: 17px; font-weight: 600; color: #f4f6ff; line-height: 1.5; }
+.next-i .dot { width: 34px; height: 34px; border-radius: 50%; margin: 0 auto 0.6vh; font-size: 18px; font-weight: 800; background: #2fd8ad; color: #06261e; }
+body.is-success .ok-circle { display: -webkit-box; display: -webkit-flex; display: flex; }
+body.is-success .next { display: -webkit-box; display: -webkit-flex; display: flex; width: 860px; max-width: 96%; margin: 0 auto; }
+body.is-success .pv-sub { display: block; }
+body.is-success .only-load { display: none; }
+
+/* counter pill (index only) — the ids okCount / failCount are the ones the counter script writes to */
+.mini-count { position: fixed; top: 2.6vh; right: 3vw; z-index: 20; padding: 5px 16px; border-radius: 999px; border: 2px solid rgba(255,255,255,0.25); background: rgba(0,0,0,0.35); font-size: 16px; font-weight: 700; line-height: 1.5; }
+.mini-count span { margin: 0 8px; }
+.mini-count svg { display: block; margin-left: 6px; }
+.mini-count .c-ok { color: #2fd8ad; }
+.mini-count .c-bad { color: #ff6b72; }
+
+@media (max-height: 640px) {
+  .has-steps .logo { width: 16vh; }
+  .pv-title.big { font-size: 34px; }
+  .dc-ver { font-size: 44px; }
+  .big-btn { font-size: 26px; }
+  .step .dot { width: 48px; height: 48px; font-size: 22px; }
+  .steps:before, .steps:after { top: 24px; }
+}
+
+
+/* ============================================================
+   SARO PRO — preview concept (static: no animation, no blur,
+   no backdrop-filter; gradients + box-shadow only)
+   ============================================================ */
+body.sp { padding: 0; }
+
+.sp-glow { position: fixed; left: 50%; top: -6vh; width: 980px; height: 980px; margin-left: -490px;
+  background: radial-gradient(circle, rgba(47,107,255,0.30) 0%, rgba(47,107,255,0.10) 38%, rgba(47,107,255,0) 64%); }
+.sp-vig { position: fixed; left: 0; top: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0) 52%, rgba(0,0,0,0.62) 100%); }
+
+.sp-main { position: relative; min-height: 100vh; padding: 3vh 0 13vh; text-align: center;
+  display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-orient: vertical; -webkit-flex-direction: column; flex-direction: column; -webkit-box-align: center; -webkit-align-items: center; align-items: center; -webkit-box-pack: center; -webkit-justify-content: center; justify-content: center; }
+.sp-main.compact { padding-bottom: 14vh; }
+
+/* circular emblem */
+.sp-emblem { position: relative; width: 25vh; height: 25vh; max-width: 250px; max-height: 250px; border-radius: 50%; overflow: visible; margin: 0 auto;
+  border: 3px solid #3b78ff;
+  box-shadow: 0 0 0 7px rgba(59,120,255,0.16), 0 0 46px rgba(36,89,240,0.62); }
+.sp-emblem .face { position: absolute; left: 0; top: 0; right: 0; bottom: 0; border-radius: 50%; overflow: hidden; background: #000; }
+.sp-emblem img { display: block; width: 100%; height: 100%; }
+.sp-emblem.sm { width: 17vh; height: 17vh; max-width: 170px; max-height: 170px; }
+.sp-emblem.ok { border-color: #2fd8ad; box-shadow: 0 0 0 8px rgba(47,216,173,0.14), 0 0 52px rgba(47,216,173,0.55); }
+.sp-badge-ok { position: absolute; right: -4px; bottom: 2px; width: 4.6vh; height: 4.6vh; max-width: 46px; max-height: 46px; border-radius: 50%;
+  display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; -webkit-box-pack: center; -webkit-justify-content: center; justify-content: center; background: #2fd8ad; color: #06261e; border: 3px solid #05070f; }
+
+/* tag line with PS symbols */
+.sp-tag { display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; -webkit-box-pack: center; -webkit-justify-content: center; justify-content: center; margin: 1.8vh 0 2vh; direction: ltr; font-size: 15px; font-weight: 700; letter-spacing: 0.22em; color: #8f9bc2; }
+.sp-tag i { display: block; margin: 0 14px; line-height: 0; }
+.t-tri { color: #22c097; } .t-cir { color: #ff4d57; } .t-crs { color: #4a86ff; } .t-sqr { color: #e03aa8; }
+
+/* silver text */
+.silver { background: linear-gradient(180deg, #ffffff 0%, #c9d3f5 55%, #8f9bc2 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: #dfe6ff; }
+
+/* glass card */
+.sp-card { width: 640px; max-width: 92%; padding: 2.2vh 36px 2vh; border-radius: 24px; border: 1px solid rgba(110,160,255,0.38);
+  background: linear-gradient(180deg, #111c3c 0%, #080d1f 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 18px 50px rgba(0,0,0,0.55); }
+.sp-label { font-size: 16px; font-weight: 600; color: #8f9bc2; letter-spacing: 0.06em; }
+.sp-row { display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; -webkit-box-pack: center; -webkit-justify-content: center; justify-content: center; }
+.sp-ps { font-size: 28px; font-weight: 700; color: #c8d2f5; margin-left: 12px; direction: ltr; }
+.sp-ver { font-size: 60px; font-weight: 800; line-height: 1.12; direction: ltr; margin-left: 22px; }
+.sp-pill { display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; padding: 4px 18px 4px 12px; border-radius: 999px; font-size: 20px; font-weight: 700;
+  color: #2fd8ad; border: 2px solid #2fd8ad; background: rgba(34,192,151,0.14); box-shadow: 0 0 18px rgba(47,216,173,0.25); }
+.sp-pill svg { display: block; margin-left: 8px; }
+
+.sp-btn { display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; -webkit-box-pack: center; -webkit-justify-content: center; justify-content: center; width: 430px; max-width: 100%; margin: 2vh auto 0; padding: 1.1vh 0; border-radius: 999px;
+  font-size: 30px; font-weight: 800; color: #ffffff; text-decoration: none; border: 1px solid #7fa8ff;
+  background: linear-gradient(180deg, #4a86ff 0%, #2158e8 52%, #1042c5 100%);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.36), 0 8px 28px rgba(36,89,240,0.60);
+  outline: 3px solid rgba(160,195,255,0.9); outline-offset: 4px; }
+.sp-btn .sym { display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; -webkit-box-pack: center; -webkit-justify-content: center; justify-content: center; width: 38px; height: 38px; margin-left: 16px; border-radius: 50%;
+  background: rgba(255,255,255,0.16); border: 2px solid rgba(255,255,255,0.7); }
+.sp-hint { font-size: 15px; color: #8f9bc2; margin: 1.3vh 0 0; }
+
+.sp-links { display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-pack: center; -webkit-justify-content: center; justify-content: center; margin-top: 1.8vh; }
+.sp-ghost { display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; margin: 0 8px; padding: 5px 22px 5px 14px; border-radius: 999px; font-size: 18px; font-weight: 600;
+  color: #c8d2f5; text-decoration: none; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.045); }
+.sp-ghost.t-tri .sym { color: #22c097; } .sp-ghost.t-sqr .sym { color: #e03aa8; }
+.sp-ghost .sym { display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; -webkit-box-pack: center; -webkit-justify-content: center; justify-content: center; width: 28px; height: 28px; margin-left: 12px; border-radius: 50%; border: 2px solid currentColor; }
+
+/* steps with PlayStation symbols */
+.sp-title { font-size: 32px; font-weight: 800; margin: 1.8vh 0 1.4vh; line-height: 1.35; }
+.sp-title.big { font-size: 44px; margin: 2vh 0 1.4vh; }
+.sp-steps { display: -webkit-box; display: -webkit-flex; display: flex; width: 720px; max-width: 94%; margin: 1vh auto 2.2vh; padding: 0; list-style: none; position: relative; }
+.sp-steps:before { content: ""; position: absolute; top: 30px; left: 16.66%; right: 16.66%; height: 4px; margin-top: -2px; border-radius: 2px;
+  background: rgba(255,255,255,0.12); }
+.sp-steps li { -webkit-box-flex: 1; -webkit-flex: 1; flex: 1; text-align: center; position: relative; z-index: 1; }
+.sp-steps .n { position: relative; display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; -webkit-box-pack: center; -webkit-justify-content: center; justify-content: center; width: 60px; height: 60px; margin: 0 auto 1vh; border-radius: 50%;
+  background: #0a1128; border: 3px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.35); }
+.sp-steps b { display: block; font-size: 20px; font-weight: 700; color: #f4f6ff; line-height: 1.4; }
+.sp-steps small { display: block; font-size: 15px; color: #8f9bc2; line-height: 1.4; }
+.sp-steps .active .n { box-shadow: 0 0 0 7px rgba(255,255,255,0.06), 0 0 26px currentColor; }
+.sp-steps .done .n { background: #0a1128; }
+.sp-steps .done .n:after { content: ""; }
+.sp-steps .ck { position: absolute; right: -7px; bottom: -5px; width: 24px; height: 24px; border-radius: 50%; display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; -webkit-box-pack: center; -webkit-justify-content: center; justify-content: center; background: #2fd8ad; color: #06261e; border: 2px solid #05070f; }
+.sp-steps .tri { color: #22c097; border-color: #22c097; }
+.sp-steps .cir { color: #ff4d57; }
+.sp-steps .crs { color: #4a86ff; }
+.sp-steps .pend .n { color: rgba(255,255,255,0.32); border-color: rgba(255,255,255,0.16); }
+.sp-steps .active small { color: #6ea0ff; }
+.sp-steps .done small { color: #2fd8ad; }
+
+.sp-status { display: inline-block; padding: 1.2vh 34px; border-radius: 18px; font-size: 24px; font-weight: 700; color: #ffffff;
+  border: 2px solid rgba(110,160,255,0.55); background: rgba(12,18,38,0.85); box-shadow: 0 0 24px rgba(36,89,240,0.25); }
+.sp-status.ok { border-color: #2fd8ad; background: rgba(34,192,151,0.14); box-shadow: 0 0 26px rgba(47,216,173,0.28); }
+
+.sp-bar4 { width: 540px; max-width: 80%; height: 12px; margin: 2vh auto 0; border-radius: 8px; background: rgba(255,255,255,0.09); overflow: hidden; }
+.sp-bar4 i { display: block; height: 100%; border-radius: 8px; background: linear-gradient(to left, #22c097 0%, #2459f0 38%, #ff4d57 70%, #e03aa8 100%); }
+.sp-note { font-size: 17px; color: #8f9bc2; margin: 1.4vh 0 0; }
+
+/* success */
+.sp-sub { font-size: 20px; font-weight: 700; color: #f4f6ff; margin: 2.2vh 0 1vh; }
+.sp-next { display: -webkit-box; display: -webkit-flex; display: flex; width: 880px; max-width: 96%; margin: 0 auto; }
+.sp-next div { -webkit-box-flex: 1; -webkit-flex: 1; flex: 1; margin: 0 8px; padding: 1.4vh 14px; border-radius: 18px; text-align: center; font-size: 17px; font-weight: 600; line-height: 1.5; color: #f4f6ff;
+  background: linear-gradient(180deg, #111c3c 0%, #0a1128 100%); border: 1px solid rgba(110,160,255,0.32); box-shadow: inset 0 1px 0 rgba(255,255,255,0.06); }
+.sp-next .sy { display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; -webkit-box-pack: center; -webkit-justify-content: center; justify-content: center; width: 36px; height: 36px; margin: 0 auto 0.7vh; border-radius: 50%; border: 2px solid currentColor; }
+
+/* bottom bar: phones | credit | controller hints */
+.sp-foot { position: fixed; left: 0; right: 0; bottom: 0; height: 13.6vh; min-height: 86px; display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; padding: 0 4vw;
+  background: linear-gradient(180deg, rgba(5,8,18,0) 0%, rgba(5,8,18,0.92) 34%); }
+.sp-foot:before { content: ""; position: absolute; left: 4vw; right: 4vw; top: 12px; height: 2px; border-radius: 2px;
+  background: linear-gradient(to right, #22c097, #2459f0 35%, #ff4d57 68%, #e03aa8); opacity: 0.85; }
+.sp-foot .ph { display: -webkit-box; display: -webkit-flex; display: flex; margin-top: 3.4vh; }
+.sp-foot .ph a { display: block; margin-left: 10px; padding: 3px 22px; border-radius: 999px; font-size: 20px; font-weight: 800; color: #ffffff; text-decoration: none;
+  background: linear-gradient(180deg, #4a86ff 0%, #1042c5 100%); border: 1px solid #7fa8ff; box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+.sp-foot .cr { -webkit-box-flex: 1; -webkit-flex: 1; flex: 1; margin-top: 3.4vh; text-align: center; font-size: 17px; line-height: 1.5; color: #aab6dc; }
+.sp-foot .cr a { color: #6ea0ff; font-weight: 700; text-decoration: none; }
+.sp-foot .hk { display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; margin-top: 3.4vh; font-size: 16px; font-weight: 600; color: #aab6dc; }
+.sp-foot .hk span { display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; margin-right: 16px; }
+.sp-foot .hk em { display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; -webkit-box-pack: center; -webkit-justify-content: center; justify-content: center; width: 28px; height: 28px; margin-left: 8px; border-radius: 50%; border: 2px solid currentColor; font-style: normal; }
+
+/* ---- real-page additions (states, ids the old theme styles, focus) ---- */
+.sp-btn { outline: none; }
+.sp-btn:focus { outline: 3px solid rgba(160,195,255,0.95); outline-offset: 4px; }
+.sp-btn.disabled { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.16); color: rgba(255,255,255,0.42); box-shadow: none; }
+.sp-btn.disabled .sym { border-color: rgba(255,255,255,0.3); }
+.sp-pill.bad { color: #ff6b72; border-color: #ff6b72; background: rgba(229,50,58,0.14); box-shadow: 0 0 18px rgba(255,77,87,0.25); }
+.sp-ghost .lbl { color: #c8d2f5; }
+.sp-ghost.t-cir .sym { color: #ff4d57; }
+.sp-ghost:focus { outline: 3px solid #6ea0ff; outline-offset: 3px; background: rgba(110,160,255,0.14); }
+
+/* the status box is the element the host scripts write to (#msgs): id-level selectors beat the old #msgs rule */
+#msgs.sp-status { display: inline-block; max-width: 94%; font-size: 24px; font-weight: 700; line-height: 1.5; padding: 1.2vh 34px; border-radius: 18px; color: #ffffff;
+  border: 2px solid rgba(110,160,255,0.55); background: rgba(12,18,38,0.85); box-shadow: 0 0 24px rgba(36,89,240,0.25); margin: 0 auto; }
+#msgs.sp-status.ok   { border-color: #2fd8ad; background: rgba(34,192,151,0.14); box-shadow: 0 0 26px rgba(47,216,173,0.28); }
+#msgs.sp-status.fail { border-color: #ff4d57; background: rgba(229,50,58,0.16); box-shadow: 0 0 26px rgba(255,77,87,0.30); }
+
+.sp-bar4 i.ok   { background: #2fd8ad; }
+.sp-bar4 i.fail { background: #ff4d57; }
+
+.sp-steps li.fail .n { color: #ff4d57; border-color: #ff4d57; box-shadow: 0 0 0 7px rgba(255,77,87,0.10), 0 0 26px rgba(255,77,87,0.55); }
+.sp-steps li.fail small { color: #ff6b72; }
+
+.sp-badge-ok { display: none; }
+.sp-emblem.ok .sp-badge-ok { display: -webkit-box; display: -webkit-flex; display: -webkit-box; display: -webkit-flex; display: flex; }
+.sp-emblem.fail { border-color: #ff4d57; box-shadow: 0 0 0 8px rgba(255,77,87,0.14), 0 0 52px rgba(255,77,87,0.50); }
+
+.sp-next, .sp-sub { display: none; }
+body.sp.is-success .sp-next { display: -webkit-box; display: -webkit-flex; display: -webkit-box; display: -webkit-flex; display: flex; }
+body.sp.is-success .sp-sub { display: block; }
+body.sp.is-success .only-load { display: none; }
+
+/* home: "different version" panel (the old #menu rule needs id-level specificity) */
+body.sp #menu.alt-panel { display: none; width: 100%; max-width: 900px; }
+body.sp.alt-open #menu.alt-panel { display: block; }
+body.sp.alt-open .sp-card, body.sp.alt-open .sp-links, body.sp.alt-open .sp-tag { display: none; }
+#menu.alt-panel .sp-ghost { display: -webkit-inline-box; display: -webkit-inline-flex; display: inline-flex; margin-top: 1.6vh; }
+#menu.alt-panel .grid { margin-top: 1.6vh; }
+
+@media (max-height: 640px) {
+  .sp-emblem { width: 21vh; height: 21vh; }
+  .sp-emblem.sm { width: 15vh; height: 15vh; }
+  .sp-ver { font-size: 48px; }
+  .sp-btn { font-size: 26px; }
+  .sp-title.big { font-size: 36px; }
+  .sp-status, #msgs.sp-status { font-size: 21px; }
+  .sp-steps .n { width: 52px; height: 52px; }
+  .sp-steps:before { top: 26px; }
+}
+
+@-webkit-keyframes drift1{from{-webkit-transform:translate(0,0) scale(1)}to{-webkit-transform:translate(60px,40px) scale(1.12)}}
+@keyframes drift1{from{transform:translate(0,0) scale(1)}to{transform:translate(60px,40px) scale(1.12)}}
+@-webkit-keyframes drift2{from{-webkit-transform:translate(0,0) scale(1)}to{-webkit-transform:translate(-40px,-50px) scale(1.15)}}
+@keyframes drift2{from{transform:translate(0,0) scale(1)}to{transform:translate(-40px,-50px) scale(1.15)}}
+@-webkit-keyframes breathe{from{opacity:.14;-webkit-transform:scale(1)}to{opacity:.26;-webkit-transform:scale(1.03)}}
+@keyframes breathe{from{opacity:.14;transform:scale(1)}to{opacity:.26;transform:scale(1.03)}}
+@-webkit-keyframes floaty{0%,100%{-webkit-transform:translateY(0) rotate(0deg)}50%{-webkit-transform:translateY(-26px) rotate(14deg)}}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-26px) rotate(14deg)}}
+@-webkit-keyframes spin{from{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(360deg)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@-webkit-keyframes spinrev{from{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(-360deg)}}
+@keyframes spinrev{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+@-webkit-keyframes rise{from{opacity:0;-webkit-transform:translateY(22px)}to{opacity:1;-webkit-transform:translateY(0)}}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@-webkit-keyframes glow{0%,100%{box-shadow:0 0 0 7px rgba(59,120,255,.16),0 0 40px rgba(36,89,240,.5)}50%{box-shadow:0 0 0 11px rgba(59,120,255,.10),0 0 64px rgba(36,89,240,.8)}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 7px rgba(59,120,255,.16),0 0 40px rgba(36,89,240,.5)}50%{box-shadow:0 0 0 11px rgba(59,120,255,.10),0 0 64px rgba(36,89,240,.8)}}
+@-webkit-keyframes glowok{0%,100%{box-shadow:0 0 0 8px rgba(47,216,173,.14),0 0 48px rgba(47,216,173,.5)}50%{box-shadow:0 0 0 14px rgba(47,216,173,.08),0 0 78px rgba(47,216,173,.8)}}
+@keyframes glowok{0%,100%{box-shadow:0 0 0 8px rgba(47,216,173,.14),0 0 48px rgba(47,216,173,.5)}50%{box-shadow:0 0 0 14px rgba(47,216,173,.08),0 0 78px rgba(47,216,173,.8)}}
+@-webkit-keyframes shake{0%,100%{-webkit-transform:translateX(0)}15%{-webkit-transform:translateX(-12px)}30%{-webkit-transform:translateX(10px)}45%{-webkit-transform:translateX(-8px)}60%{-webkit-transform:translateX(6px)}80%{-webkit-transform:translateX(-3px)}}
+@keyframes shake{0%,100%{transform:translateX(0)}15%{transform:translateX(-12px)}30%{transform:translateX(10px)}45%{transform:translateX(-8px)}60%{transform:translateX(6px)}80%{transform:translateX(-3px)}}
+@-webkit-keyframes shine{0%{left:-130px}55%,100%{left:620px}}
+@keyframes shine{0%{left:-130px}55%,100%{left:620px}}
+@-webkit-keyframes btnpulse{0%,100%{box-shadow:inset 0 2px 0 rgba(255,255,255,.36),0 8px 28px rgba(36,89,240,.6)}50%{box-shadow:inset 0 2px 0 rgba(255,255,255,.36),0 8px 44px rgba(74,134,255,.95)}}
+@keyframes btnpulse{0%,100%{box-shadow:inset 0 2px 0 rgba(255,255,255,.36),0 8px 28px rgba(36,89,240,.6)}50%{box-shadow:inset 0 2px 0 rgba(255,255,255,.36),0 8px 44px rgba(74,134,255,.95)}}
+@-webkit-keyframes ringpulse{0%,100%{box-shadow:0 0 0 7px rgba(255,255,255,.06),0 0 22px currentColor}50%{box-shadow:0 0 0 11px rgba(255,255,255,.03),0 0 40px currentColor}}
+@keyframes ringpulse{0%,100%{box-shadow:0 0 0 7px rgba(255,255,255,.06),0 0 22px currentColor}50%{box-shadow:0 0 0 11px rgba(255,255,255,.03),0 0 40px currentColor}}
+@-webkit-keyframes pop{from{-webkit-transform:scale(0)}to{-webkit-transform:scale(1)}}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+@-webkit-keyframes shimmer{from{background-position:220% 0}to{background-position:-20% 0}}
+@keyframes shimmer{from{background-position:220% 0}to{background-position:-20% 0}}
+@-webkit-keyframes draw{to{stroke-dashoffset:0}}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ===================================================================
+   Pro Max layer — motion + background art (no CSS variables, no
+   filters, no backdrop-filter; transforms/opacity/box-shadow only).
+   Everything animated can be switched off at once: <body class="sp still"> (the page also does this by itself when it senses the device struggling)
+   =================================================================== */
+
+/* background art: aurora, controller outline, floating PlayStation symbols */
+.sp-bg { position: fixed; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: 0; }
+.sp-aur { position: absolute; border-radius: 50%; }
+.sp-a1 { width: 100vh; height: 100vh; left: 50%; margin-left: -34vh; top: -48vh; background: radial-gradient(circle, rgba(47,107,255,0.40), rgba(47,107,255,0) 64%); -webkit-animation: drift1 14s ease-in-out infinite alternate; animation: drift1 14s ease-in-out infinite alternate; }
+.sp-a2 { width: 80vh; height: 80vh; left: -14vh; top: 40vh; background: radial-gradient(circle, rgba(224,58,168,0.18), rgba(224,58,168,0) 64%); -webkit-animation: drift2 19s ease-in-out infinite alternate; animation: drift2 19s ease-in-out infinite alternate; }
+.sp-a3 { width: 76vh; height: 76vh; right: -10vh; top: 36vh; background: radial-gradient(circle, rgba(34,192,151,0.15), rgba(34,192,151,0) 64%); -webkit-animation: drift1 23s ease-in-out infinite alternate-reverse; animation: drift1 23s ease-in-out infinite alternate-reverse; }
+.sp-pad { position: absolute; left: 0; right: 0; margin: 0 auto; top: 20vh; width: 1100px; max-width: 94%; height: auto; opacity: 0.2; -webkit-animation: breathe 7s ease-in-out infinite alternate; animation: breathe 7s ease-in-out infinite alternate; }
+.sp-fl { position: absolute; display: block; line-height: 0; -webkit-animation: floaty 18s ease-in-out infinite; animation: floaty 18s ease-in-out infinite; }
+.sp-main { z-index: 1; }
+.sp-foot { z-index: 5; }
+
+/* entrance: content rises in (no opacity:0 base rule, so nothing can stay hidden) */
+.rise { -webkit-animation: rise 0.65s cubic-bezier(0.2,0.8,0.2,1) both; animation: rise 0.65s cubic-bezier(0.2,0.8,0.2,1) both; }
+.d1 { -webkit-animation-delay: 0.09s; animation-delay: 0.09s; } .d2 { -webkit-animation-delay: 0.18s; animation-delay: 0.18s; } .d3 { -webkit-animation-delay: 0.27s; animation-delay: 0.27s; } .d4 { -webkit-animation-delay: 0.36s; animation-delay: 0.36s; } .d5 { -webkit-animation-delay: 0.45s; animation-delay: 0.45s; }
+
+/* home: orbiting PlayStation symbols around the emblem */
+.sp-ring { position: relative; width: 31vh; height: 31vh; max-width: 236px; max-height: 236px; margin: 0 auto; }
+.sp-orb { position: absolute; left: 0; top: 0; right: 0; bottom: 0; -webkit-animation: spin 26s linear infinite; animation: spin 26s linear infinite; }
+.sp-orb i { position: absolute; display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; -webkit-box-pack: center; -webkit-justify-content: center; justify-content: center; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; background: rgba(5,7,15,0.85); border: 2px solid currentColor; -webkit-animation: spinrev 26s linear infinite; animation: spinrev 26s linear infinite; }
+.sp-orb .o1 { left: 50%; top: 0; } .sp-orb .o2 { left: 100%; top: 50%; } .sp-orb .o3 { left: 50%; top: 100%; } .sp-orb .o4 { left: 0; top: 50%; }
+.sp-ring .sp-emblem { position: absolute; left: 18%; top: 18%; width: 64%; height: 64%; max-width: none; max-height: none; margin: 0; }
+
+/* glow / shake on the emblem */
+.sp-emblem { -webkit-animation: glow 3.6s ease-in-out infinite; animation: glow 3.6s ease-in-out infinite; }
+.sp-emblem.ok { -webkit-animation: glowok 2.4s ease-in-out infinite; animation: glowok 2.4s ease-in-out infinite; }
+.sp-emblem.fail { -webkit-animation: shake 0.6s 0.1s both; animation: shake 0.6s 0.1s both; }
+.sp-badge-ok { -webkit-animation: pop 0.5s 0.5s cubic-bezier(0.3,1.6,0.5,1) both; animation: pop 0.5s 0.5s cubic-bezier(0.3,1.6,0.5,1) both; }
+.sp-badge-ok svg path { stroke-dasharray: 44; stroke-dashoffset: 44; -webkit-animation: draw 0.55s 0.45s ease-out forwards; animation: draw 0.55s 0.45s ease-out forwards; }
+
+/* shining start button, pulsing step, moving sheen on the progress bar */
+.sp-btn { position: relative; overflow: hidden; -webkit-animation: btnpulse 2.4s ease-in-out infinite; animation: btnpulse 2.4s ease-in-out infinite; }
+.sp-btn:after { content: ""; position: absolute; top: 0; bottom: 0; width: 90px; left: -130px; background: linear-gradient(100deg, rgba(255,255,255,0), rgba(255,255,255,0.55), rgba(255,255,255,0)); -webkit-transform: skewX(-20deg); transform: skewX(-20deg); -webkit-animation: shine 3.2s ease-in-out infinite; animation: shine 3.2s ease-in-out infinite; }
+.sp-btn.disabled, .sp-btn.disabled:after { -webkit-animation: none; animation: none; }
+.sp-steps li.active .n { -webkit-animation: ringpulse 1.6s ease-in-out infinite; animation: ringpulse 1.6s ease-in-out infinite; }
+.sp-steps li.fail .n { -webkit-animation: none; animation: none; }
+.sp-steps .ck { -webkit-animation: pop 0.45s cubic-bezier(0.3,1.6,0.5,1) both; animation: pop 0.45s cubic-bezier(0.3,1.6,0.5,1) both; }
+.sp-bar4 i { position: relative; overflow: hidden; -webkit-transition: width 0.22s linear; -webkit-transition: width 0.22s linear; transition: width 0.22s linear; }
+.sp-bar4 i:after { content: ""; position: absolute; top: 0; bottom: 0; width: 60px; left: -80px; background: linear-gradient(100deg, rgba(255,255,255,0), rgba(255,255,255,0.55), rgba(255,255,255,0)); -webkit-animation: shine 1.6s linear infinite; animation: shine 1.6s linear infinite; }
+
+/* success title shimmer */
+.sp-title.shim { background: linear-gradient(100deg, #8f9bc2 0%, #ffffff 30%, #c9d3f5 50%, #ffffff 70%, #8f9bc2 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; -webkit-animation: shimmer 4.5s linear infinite; animation: shimmer 4.5s linear infinite; }
+.sp-title.big { font-size: 44px; }
+
+/* success burst */
+.sp-burst { position: fixed; left: 0; top: 0; width: 0; height: 0; z-index: 3; }
+.sp-burst i { position: absolute; left: 0; top: 0; border-radius: 2px; opacity: 1; -webkit-transition: -webkit-transform 1.4s cubic-bezier(0.1,0.7,0.3,1), opacity 1.4s ease-in; transition: transform 1.4s cubic-bezier(0.1,0.7,0.3,1), opacity 1.4s ease-in; }
+
+/* tiles on the success screen */
+.sp-next .sy.ps { font-size: 15px; font-weight: 800; letter-spacing: 0.02em; line-height: 1; color: #22c097; }
+
+/* announcement chip (home only, filled from announce.txt) */
+.sp-ann { display: none; position: fixed; top: 2.6vh; left: 0; right: 0; margin: 0 auto; max-width: 46vw; z-index: 20; padding: 5px 18px; border-radius: 999px; border: 2px solid rgba(110,160,255,0.35); background: rgba(0,0,0,0.38); font-size: 16px; font-weight: 700; line-height: 1.5; color: #c8d2f5; text-align: center; overflow: hidden; white-space: nowrap; }
+body.has-ann .sp-main { padding-top: 8vh; }
+
+/* tighter home so ring + card + links always clear the bottom bar */
+.sp-ring { width: 27vh; height: 27vh; max-width: 220px; max-height: 220px; }
+.sp-tag { margin: 1.2vh 0 1.4vh; }
+.sp-card { padding: 1.7vh 36px 1.4vh; }
+.sp-ver { font-size: 52px; }
+.sp-btn { font-size: 28px; margin-top: 1.4vh; padding: 0.9vh 0; }
+.sp-hint { margin-top: 1vh; }
+.sp-links { margin-top: 1.2vh; }
+
+/* one switch for everything: <body class="sp still"> */
+body.still *, body.still *:after, html.still *, html.still *:after { -webkit-animation: none !important; animation: none !important; -webkit-animation: none !important; -webkit-transition: none !important; transition: none !important; -webkit-transition: none !important; }
+
+@media (max-height: 640px) {
+  .sp-ring { width: 23vh; height: 23vh; }
+  .sp-orb i { width: 28px; height: 28px; margin: -14px 0 0 -14px; }
+  .sp-card { padding: 1.2vh 30px 1vh; }
+  .sp-label { font-size: 14px; }
+  .sp-ver { font-size: 42px; }
+  .sp-btn { font-size: 24px; }
+  .sp-hint { font-size: 13px; margin-top: 0.6vh; }
+}
+@media (max-height: 600px) {
+  .sp-tag { display: none; }
+  .sp-links { margin-top: 1vh; }
+}
